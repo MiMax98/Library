@@ -1,0 +1,17 @@
+﻿@model List<Book>
+<h1>Lista książek</h1>
+
+<table>
+    <tr>
+        <th>Autor książki</th>
+        <th>Tytuł książki</th>
+    </tr>
+    @foreach (var element in Model)
+    {
+        <tr>
+            <td>@element.Author</td>
+            <td>@element.Title</td>
+        </tr>
+    }
+</table>
+
