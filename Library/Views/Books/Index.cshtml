@@ -2,18 +2,22 @@
 <h1 class="display-5">Lista książek</h1>
 <a class="btn btn-primary" asp-action="Add">Dodaj</a>
 <table class="table table-light table-striped mt-4">
-    <tr>
-        <th>Tytuł książki</th>
-        <th>Autor książki</th>
-        <th></th>
-    </tr>
-    @foreach (var element in Model)
-    {
+    <thead>
         <tr>
-            <td>@element.Title</td>
-            <td>@element.Author</td>
-            <td><a type="button" asp-action="Delete" asp-route-bookId="@element.Id" class="btn btn-danger">Usuń</a></td>
+            <th>Tytuł książki</th>
+            <th>Autor książki</th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var element in Model)
+        {
+            <tr>
+                <td>@element.Title</td>
+                <td>@element.Author</td>
+                <td><a type="button" asp-action="Delete" asp-route-bookId="@element.Id" class="btn btn-danger">Usuń</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
 
