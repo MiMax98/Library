@@ -4,6 +4,7 @@ using Library.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220605135338_BookRequiredFields")]
+    partial class BookRequiredFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,123 +96,6 @@ namespace Library.Data.Migrations
                             Author = "J. K. Rowling",
                             Title = "Harry Potter i Insygnia Śmierci",
                             Year = 2007
-                        });
-                });
-
-            modelBuilder.Entity("Library.Models.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Jan",
-                            Grade = 1,
-                            LastName = "Kowalski"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Jan",
-                            Grade = 1,
-                            LastName = "Nowak"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Marek",
-                            Grade = 2,
-                            LastName = "Potocki"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Zbigniew",
-                            Grade = 3,
-                            LastName = "Branicki"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FirstName = "Mateusz",
-                            Grade = 4,
-                            LastName = "Lewandowski"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FirstName = "Maksymilian",
-                            Grade = 5,
-                            LastName = "Piszczek"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            FirstName = "Marcin",
-                            Grade = 6,
-                            LastName = "Zdun"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            FirstName = "Aleksander",
-                            Grade = 1,
-                            LastName = "Kupaga"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            FirstName = "Monika",
-                            Grade = 2,
-                            LastName = "Laskowska"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            FirstName = "Ewelina",
-                            Grade = 3,
-                            LastName = "Kowalik"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            FirstName = "Anna",
-                            Grade = 4,
-                            LastName = "Marcinkowska"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            FirstName = "Jadwiga",
-                            Grade = 5,
-                            LastName = "Piotrowska"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            FirstName = "Franciszek",
-                            Grade = 6,
-                            LastName = "Czartoryski"
                         });
                 });
 
