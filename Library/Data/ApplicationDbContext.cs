@@ -17,7 +17,7 @@ namespace Library.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             builder.Entity<Book>().HasData(
                 new Book { Id = 1, Title = "Harry Potter i Kamień Filozoficzny", Author = "J. K. Rowling", Year = 1997 },
                 new Book { Id = 2, Title = "Harry Potter i Komnata Tajemnic", Author = "J. K. Rowling", Year = 1998 },
