@@ -15,7 +15,10 @@ namespace Library.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Books.ToList());
+            var books = _context.Books
+                .Where(b => b.Orders.All(o => o.Returned != null))
+                .ToList();
+            return View(books);
         }
 
         public IActionResult Add()
@@ -37,6 +40,5 @@ namespace Library.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
     }
 }

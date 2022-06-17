@@ -1,11 +1,12 @@
 ﻿@model List<Book>
-<h1 class="display-5">Lista książek</h1>
+<h1>Lista książek</h1>
 <a class="btn btn-primary" asp-action="Add">Dodaj</a>
 <table class="table table-light table-striped mt-4">
     <thead>
         <tr>
             <th>Tytuł książki</th>
             <th>Autor książki</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -16,6 +17,7 @@
                 <td>@element.Title</td>
                 <td>@element.Author</td>
                 <td><a type="button" asp-action="Delete" asp-route-bookId="@element.Id" class="btn btn-danger">Usuń</a></td>
+                <td><a type="button" asp-controller="Orders" asp-action="Create" asp-route-bookId="@element.Id" class="btn btn-success">Wypożycz</a></td>
             </tr>
         }
     </tbody>

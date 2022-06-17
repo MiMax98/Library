@@ -11,5 +11,7 @@ namespace Library.Models
         public string LastName { get; set; }
         [DisplayName("Klasa")]
         public int Grade { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

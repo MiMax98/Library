@@ -18,5 +18,7 @@ namespace Library.Models
         [DisplayName("Rok")]
         [Required(ErrorMessage = "Rok jest wymagany")]
         public int Year { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }
