@@ -1,23 +1,21 @@
-﻿using Library.Data;
-using Library.Models;
+﻿using Library.Models;
+using Library.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBookService _bookService;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(IBookService bookService)
         {
-            _context = context;
+            _bookService = bookService;
         }
 
         public IActionResult Index()
         {
-            var books = _context.Books
-                .Where(b => b.Orders.All(o => o.Returned != null))
-                .ToList();
+            var books = _bookService.GetAvailableBooks();
             return View(books);
         }
 
@@ -29,15 +27,13 @@ namespace Library.Controllers
         [HttpPost]
         public IActionResult Add(Book book)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            _bookService.AddBook(book);
             return RedirectToAction("Index");
         }
         
         public IActionResult Delete(int bookId)
         {
-            _context.Books.Remove(new Book { Id=bookId });
-            _context.SaveChanges();
+            _bookService.Delete(bookId);
             return RedirectToAction("Index");
         }
     }

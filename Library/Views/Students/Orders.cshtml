@@ -1,0 +1,56 @@
+﻿@model StudentOrdersViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Wypożycznone książki</h1>
+
+    <hr />
+    <dl class="row">
+        <dt>@Html.DisplayNameFor(model => model.Student.LastName)</dt>
+        <dd>@Model.Student.LastName</dd>
+        <dt>@Html.DisplayNameFor(model => model.Student.FirstName)</dt>
+        <dd>@Model.Student.FirstName</dd>
+    </dl>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Book.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders.First().Created)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Orders)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a type="button" asp-controller="Orders" asp-action="Return" asp-route-orderId="@item.Id" class="btn btn-danger">Zwróć</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Students" asp-action="Index">Powrót</a>
+</div>

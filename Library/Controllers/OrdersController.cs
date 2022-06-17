@@ -1,22 +1,29 @@
-﻿using Library.Data;
-using Library.Models;
+﻿using Library.Models;
+using Library.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IOrderService _orderService;
+        private readonly IStudentService _studentService;
+        private readonly IBookService _bookService;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(
+            IOrderService orderService,
+            IStudentService studentService,
+            IBookService bookService)
         {
-            _context = context;
+            _orderService = orderService;
+            _studentService = studentService;
+            _bookService = bookService;
         }
 
         public IActionResult Create(int bookId)
         {
-            var students = _context.Students.OrderBy(s => s.LastName).ThenBy(s => s.FirstName).ToList();
-            var book = _context.Books.Single(b => b.Id == bookId);
+            var students = _studentService.GetStudents();
+            var book = _bookService.GetBook(bookId);
             var model = new CreateOrderViewModel(book, students);
             return View(model);
         }
@@ -24,16 +31,14 @@ namespace Library.Controllers
         [HttpPost]
         public IActionResult Create(int bookId, int studentId)
         {
-            var order = new Order
-            {
-                BookId = bookId,
-                StudentId = studentId,
-                Created = DateTime.Now
-            };
-            _context.Orders.Add(order);
-            _context.SaveChanges();
-
+            _orderService.Create(bookId, studentId);
             return RedirectToAction("Index", "Books");
+        }
+
+        public IActionResult Return(int orderId)
+        {
+            _orderService.Return(orderId);
+            return RedirectToAction("Index", "Students");
         }
     }
 }

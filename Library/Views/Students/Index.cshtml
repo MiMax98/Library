@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="display-5">Lista czytelników</h1>
+<h1>Lista uczniów</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Add">Dodaj</a>
@@ -13,33 +13,51 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                Wypożyczenia
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grade)
-            </td>
-            <td>
-                <a type="button" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Usuń</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @item.Orders.Count
+                </td>
+                <td>
+                    @if (item.Orders.Count == 0)
+                    {
+                        <a type="button" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Usuń</a>
+                        <button disabled class="btn btn-success">Wypożyczenia</button>
+                    }
+                    else
+                    {
+                        <button disabled class="btn btn-danger">Usuń</button>
+                        <a type="button" asp-action="Orders" asp-route-id="@item.Id" class="btn btn-success">Wypożyczenia</a>
+                    }
+
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

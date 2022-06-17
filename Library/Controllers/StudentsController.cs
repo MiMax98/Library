@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Library.Data;
-using Library.Models;
+﻿using Library.Models;
+using Library.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
     public class StudentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IStudentService _studentService;
 
-        public StudentsController(ApplicationDbContext context)
+        public StudentsController(IStudentService studentService)
         {
-            _context = context;
+            _studentService = studentService;
         }
+
         public IActionResult Index()
         {
-            return View(_context.Students.ToList());
+            var students = _studentService.GetStudents();
+            return View(students);
         }
         public IActionResult Add()
         {
@@ -23,16 +25,26 @@ namespace Library.Controllers
         [HttpPost]
         public IActionResult Add(Student student)
         {
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            _studentService.AddStudent(student);
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int studentId)
         {
-            _context.Students.Remove(new Student { Id = studentId });
-            _context.SaveChanges();
+            _studentService.DeleteStudent(studentId);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Orders(int id)
+        {
+            var orders = _studentService.GetActiveOrders(id);
+            var student = _studentService.GetStudent(id);
+            var model = new StudentOrdersViewModel
+            {
+                Orders = orders,
+                Student = student
+            };
+            return View(model);
         }
     }
 }

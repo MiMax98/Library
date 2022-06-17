@@ -1,8 +1,11 @@
-﻿namespace Library.Models
+﻿using System.ComponentModel;
+
+namespace Library.Models
 {
     public class Order
     {
         public int Id { get; set; }
+        [DisplayName("Data wypożyczenia")]
         public DateTime Created { get; set; }
         public DateTime? Returned { get; set; }
 
