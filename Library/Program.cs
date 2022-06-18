@@ -1,4 +1,6 @@
 ﻿using Library.Data;
+using Library.Repositories;
+using Library.Repositories.Implementations;
 using Library.Services;
 using Library.Services.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +22,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IStudentRepository, StudentRepository>();
 
 var app = builder.Build();
 
@@ -45,7 +50,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Books}/{action=Index}/{id?}");
+    pattern: "{controller=Students}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

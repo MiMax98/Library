@@ -1,31 +1,34 @@
-﻿using Library.Data;
-using Library.Models;
+﻿using Library.Models;
+using Library.Repositories;
 
 namespace Library.Services.Implementations
 {
     public class BookService : IBookService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBookRepository _bookRepository;
 
-        public BookService(ApplicationDbContext context)
+        public BookService(IBookRepository bookRepository)
         {
-            _context = context;
+            _bookRepository = bookRepository;
         }
         public void AddBook(Book book)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            _bookRepository.AddBook(book);
         }
 
         public void Delete(int bookId)
         {
-            _context.Books.Remove(new Book { Id = bookId });
-            _context.SaveChanges();
+            var book = _bookRepository.GetBook(bookId);
+            if (book == null)
+            {
+                throw new InvalidOperationException("Książka nie istnieje");
+            }
+            _bookRepository.DeleteBook(book);
         }
 
         public List<Book> GetAvailableBooks()
         {
-            var books = _context.Books
+            var books = _bookRepository.GetBooks()
                 .Where(b => b.Orders.All(o => o.Returned != null))
                 .ToList();
             return books;
@@ -33,7 +36,12 @@ namespace Library.Services.Implementations
 
         public Book GetBook(int bookId)
         {
-            return _context.Books.Single(b => b.Id == bookId);
+            var book = _bookRepository.GetBook(bookId);
+            if (book == null)
+            {
+                throw new InvalidOperationException("Książka nie istnieje");
+            }
+            return book;
         }
     }
 }

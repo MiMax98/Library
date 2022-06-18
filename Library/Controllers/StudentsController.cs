@@ -38,9 +38,9 @@ namespace Library.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Delete(int studentId)
+        public IActionResult Delete(int id)
         {
-            _studentService.DeleteStudent(studentId);
+            _studentService.DeleteStudent(id);
             return RedirectToAction("Index");
         }
 

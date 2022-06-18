@@ -1,15 +1,15 @@
-﻿using Library.Data;
-using Library.Models;
+﻿using Library.Models;
+using Library.Repositories;
 
 namespace Library.Services.Implementations
 {
     public class OrderService : IOrderService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IOrderRepository _orderRepository;
 
-        public OrderService(ApplicationDbContext context)
+        public OrderService(IOrderRepository orderRepository)
         {
-            _context = context;
+            _orderRepository = orderRepository;
         }
         public void Create(int bookId, int studentId)
         {
@@ -19,16 +19,18 @@ namespace Library.Services.Implementations
                 StudentId = studentId,
                 Created = DateTime.Now
             };
-            _context.Orders.Add(order);
-            _context.SaveChanges();
+            _orderRepository.AddOrder(order);
         }
 
         public void Return(int orderId)
         {
-            var order = _context.Orders.Single(o => o.Id == orderId);
+            var order = _orderRepository.GetOrder(orderId);
+            if (order == null)
+            {
+                throw new InvalidOperationException("Wypożyczenie nie istnieje");
+            }
             order.Returned = DateTime.Now;
-            _context.Update(order);
-            _context.SaveChanges();
+            _orderRepository.UpdateOrder(order);
         }
     }
 }
