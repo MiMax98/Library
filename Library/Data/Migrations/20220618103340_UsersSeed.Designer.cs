@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220617201153_UsersSeed")]
+    [Migration("20220618103340_UsersSeed")]
     partial class UsersSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -276,15 +276,15 @@ namespace Library.Data.Migrations
                         {
                             Id = "fe3f5314-b70b-4266-826d-f6cc6cb0d1bf",
                             ConcurrencyStamp = "1",
-                            Name = "Bibliotekarz",
-                            NormalizedName = "Bibliotekarz"
+                            Name = "Librarian",
+                            NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
                             Id = "fe756c0c-44ea-4482-9b15-a8fcb3c11f33",
                             ConcurrencyStamp = "2",
-                            Name = "Administrator",
-                            NormalizedName = "Administrator"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -382,13 +382,13 @@ namespace Library.Data.Migrations
                         {
                             Id = "209e7cbb-2b0c-4e7d-993c-a16bbf09ff3e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c6a5b68c-dc49-46fb-bbcc-ee8b05b2f3e8",
+                            ConcurrencyStamp = "eb8c8d6b-5cab-457f-8b32-9d773949fd74",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "BIBLIOTEKARZ",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFo9e+2v8L0bW74qvzSIxE7CohSc6hi8e1scNW2RtO9nfCBMaea1c8M2whXG62kT2w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKSnW6gsrst8MI5HU8BuTS60SPrwwSpLky+YTXcsuDBYWpYDDi4aUnymosiXJ30eog==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e546310-a38d-486c-b1eb-afc842922b5a",
+                            SecurityStamp = "0af8f3f8-907b-4e4a-85ac-2cb1c95dbd77",
                             TwoFactorEnabled = false,
                             UserName = "bibliotekarz"
                         },
@@ -396,13 +396,13 @@ namespace Library.Data.Migrations
                         {
                             Id = "69e3365c-ded9-4bbf-af5b-69fb12930d27",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "deee4ce1-01a9-4725-aa96-a32ba047e29e",
+                            ConcurrencyStamp = "c3262b6b-b57b-4a97-bdbc-4feb655ee975",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMINISTRATOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP2TSJJTer9+QkAOuBmIhMxYHwigDKUDU45cdVrdEAuKii6oI3qdAZiAtxI17h6+YA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOsjFlcReUp0Q4zwsZWBX7In9b5lMSV9PYigBf6kjjBYoZrQ9SqYWRg/VWeEoLBjcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91462d40-cb16-4a48-a635-825299020043",
+                            SecurityStamp = "f313a8b9-5b3a-442b-8d3f-092a0bf1ba16",
                             TwoFactorEnabled = false,
                             UserName = "administrator"
                         });

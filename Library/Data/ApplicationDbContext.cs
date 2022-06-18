@@ -51,16 +51,16 @@ namespace Library.Data
             var librarianRole = new IdentityRole 
             { 
                 Id = "fe3f5314-b70b-4266-826d-f6cc6cb0d1bf", 
-                Name = "Bibliotekarz", 
+                Name = "Librarian", 
                 ConcurrencyStamp = "1", 
-                NormalizedName = "Bibliotekarz" 
+                NormalizedName = "LIBRARIAN" 
             };
             var adminRole = new IdentityRole
             {
                 Id = "fe756c0c-44ea-4482-9b15-a8fcb3c11f33",
-                Name = "Administrator",
+                Name = "Admin",
                 ConcurrencyStamp = "2",
-                NormalizedName = "Administrator" 
+                NormalizedName = "ADMIN" 
             };
             builder.Entity<IdentityRole>().HasData(librarianRole, adminRole);
 

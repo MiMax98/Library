@@ -6,9 +6,12 @@
 
 <h1>Lista uczniów</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="Add">Dodaj</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn btn-primary" asp-action="Add">Dodaj</a>
+    </p>
+}
 <table class="table table-light table-striped mt-4">
     <thead>
         <tr>
@@ -24,7 +27,9 @@
             <th>
                 Wypożyczenia
             </th>
-            <th></th>
+            <th>
+                Akcje
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -46,16 +51,27 @@
                 <td>
                     @if (item.Orders.Count == 0)
                     {
-                        <a type="button" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Usuń</a>
-                        <button disabled class="btn btn-success">Wypożyczenia</button>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a type="button" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Usuń</a>
+                        }
+                        @if (User.IsInRole("Librarian"))
+                        {
+                            <button disabled class="btn btn-success">Wypożyczenia</button>
+                        }
                     }
                     else
                     {
-                        <button disabled class="btn btn-danger">Usuń</button>
-                        <a type="button" asp-action="Orders" asp-route-id="@item.Id" class="btn btn-success">Wypożyczenia</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button disabled class="btn btn-danger">Usuń</button>
+
+                        }
+                        @if (User.IsInRole("Librarian"))
+                        {
+                            <a type="button" asp-action="Orders" asp-route-id="@item.Id" class="btn btn-success">Wypożyczenia</a>
+                        }
                     }
-
-
                 </td>
             </tr>
         }
